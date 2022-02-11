@@ -48,6 +48,7 @@ async def wordle(ctx, arg="2"):
         wordList = wd.init()
         puzzle[serverId] = wd.gameInit(wordList['words'])
         guessCount[serverId] = 0
+        guessResult[serverId] = []
         await ctx.send("Game start. Type !wordle <word> to guess")
     elif(arg == "new" and wordleGameStarted[serverId] == True):
         await ctx.send("Game already started，use !wordle <word> to guess")
