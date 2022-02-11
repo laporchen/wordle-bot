@@ -42,15 +42,15 @@ async def wordle(ctx, arg="2"):
         guessCount[serverId] = 0
         guessResult[serverId] = []
     if(arg == "help"):
-        await ctx.send(ctx.author.mention + " 可以用的指令有：\n" + "$wordle new 開始遊戲\n" + "$wd word 猜字\n")
+        await ctx.send(ctx.author.mention + " Commands:\n" + "$wordle new -- Start a new game\n" + "$wd word -- Guess the word\n")
     if(arg == "new" and wordleGameStarted[serverId] == False):
         wordleGameStarted[serverId] = True
         wordList = wd.init()
         puzzle[serverId] = wd.gameInit(wordList['words'])
         guessCount[serverId] = 0
-        await ctx.send("遊戲開始，輸入$wordle <word> 來進行猜測")
+        await ctx.send("Game start. Type !wordle <word> to guess")
     elif(arg == "new" and wordleGameStarted[serverId] == True):
-        await ctx.send("遊戲已經開始了，使用$wordle <word> 來猜")
+        await ctx.send("Game already started，use !wordle <word> to guess")
     elif (wordleGameStarted[serverId]):
         res = wd.process(
             arg, puzzle[serverId], wordList['words'], wordList['allowGuesses'])
@@ -61,7 +61,7 @@ async def wordle(ctx, arg="2"):
         guessCount[serverId] += 1
         if(res[0] == True):
             await ctx.send(res[1])
-            await ctx.send("遊戲結束，猜測次數: " + str(guessCount[serverId]))
+            await ctx.send("Game ended. Guess counts :  " + str(guessCount[serverId]))
             guessStr = ""
             for i in guessResult[serverId]:
                 guessStr += i + "\n"
@@ -70,7 +70,7 @@ async def wordle(ctx, arg="2"):
             return
         await ctx.send(res[1])
         if(guessCount[serverId] > 5):
-            await ctx.send("遊戲結束，輸入$wordle new 重新開始\n" + "答案是：" + puzzle[serverId])
+            await ctx.send("Game ended. Type !wordle new to restart.\n" + "The answer was " + puzzle[serverId])
             wordleGameStarted[serverId] = False
             return
 
