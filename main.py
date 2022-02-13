@@ -11,7 +11,7 @@ wordList = []
 puzzle = {}
 guessCount = {}
 guessResult = {}
-# end wordle
+# end wordle 
 
 client = commands.Bot(command_prefix='!')
 
@@ -42,7 +42,7 @@ async def wordle(ctx, arg="2"):
         guessCount[serverId] = 0
         guessResult[serverId] = []
     if(arg == "help"):
-        await ctx.send(ctx.author.mention + " Commands:\n" + "$wordle new -- Start a new game\n" + "$wd word -- Guess the word\n")
+        await ctx.send(ctx.author.mention + " Commands:\n" + "\!wordle new -- Start a new game\n" + "\!wd word -- Guess the word\n")
     if(arg == "new" and wordleGameStarted[serverId] == False):
         wordleGameStarted[serverId] = True
         wordList = wd.init()
